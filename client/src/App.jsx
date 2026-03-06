@@ -35,9 +35,11 @@ function App() {
           <div style={{ marginBottom: '1rem' }}>
             <span style={{ fontWeight: '700', color: 'var(--text-main)' }}>HackMate</span> — Find Your Elite Squad.
           </div>
-          <div style={{ opacity: 0.8 }}>
-            Built with ❤️ by <a href="https://github.com/PraveenkumarM2005-git" target="_blank" rel="noreferrer" style={{ color: 'var(--primary)', fontWeight: '600', textDecoration: 'underline' }}>Praveenkumar</a>
+          <div style={{ opacity: 0.8, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+            <span>Engineered with Precision by</span>
+            <a href="https://github.com/PraveenkumarM2005-git" target="_blank" rel="noreferrer" style={{ color: 'var(--primary)', fontWeight: '700', textDecoration: 'none', borderBottom: '1px solid var(--primary)' }}>Praveenkumar</a>
           </div>
+
           <div style={{ marginTop: '0.5rem', fontSize: '0.8rem' }}>
             &copy; {new Date().getFullYear()} All Rights Reserved.
           </div>
