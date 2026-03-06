@@ -37,7 +37,8 @@ function App() {
           </div>
           <div style={{ opacity: 0.8, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
             <span>Engineered with Precision by</span>
-            <a href="https://github.com/PraveenkumarM2005-git" target="_blank" rel="noreferrer" style={{ color: 'var(--primary)', fontWeight: '700', textDecoration: 'none', borderBottom: '1px solid var(--primary)' }}>Praveenkumar</a>
+            <a href="https://github.com/PraveenkumarM2005-git" target="_blank" rel="noreferrer" style={{ color: 'var(--primary)', fontWeight: '700', textDecoration: 'none', borderBottom: '1px solid var(--primary)' }}>PraveenKumar.M</a>
+
           </div>
 
           <div style={{ marginTop: '0.5rem', fontSize: '0.8rem' }}>
