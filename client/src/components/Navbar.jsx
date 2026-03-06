@@ -20,14 +20,8 @@ const Navbar = () => {
     }, []);
 
     const handleLogin = async () => {
-        // Ensure the redirect URL is clean and matches Supabase's config exactly
-        const redirectTo = window.location.origin.replace(/\/$/, '');
-
         const { error } = await supabase.auth.signInWithOAuth({
-            provider: 'github',
-            options: {
-                redirectTo: redirectTo
-            }
+            provider: 'github'
         });
         if (error) console.error('Error logging in:', error.message);
     };
