@@ -28,11 +28,21 @@ function App() {
           padding: '4rem 2rem',
           textAlign: 'center',
           borderTop: '1px solid var(--glass-border)',
+          background: 'rgba(2, 6, 23, 0.5)',
           color: 'var(--text-muted)',
-          fontSize: '0.9rem'
+          fontSize: '0.95rem'
         }}>
-          &copy; 2026 HackMate. Built for Hackers.
+          <div style={{ marginBottom: '1rem' }}>
+            <span style={{ fontWeight: '700', color: 'var(--text-main)' }}>HackMate</span> — Find Your Elite Squad.
+          </div>
+          <div style={{ opacity: 0.8 }}>
+            Built with ❤️ by <a href="https://github.com/PraveenkumarM2005-git" target="_blank" rel="noreferrer" style={{ color: 'var(--primary)', fontWeight: '600', textDecoration: 'underline' }}>Praveenkumar</a>
+          </div>
+          <div style={{ marginTop: '0.5rem', fontSize: '0.8rem' }}>
+            &copy; {new Date().getFullYear()} All Rights Reserved.
+          </div>
         </footer>
+
       </div>
     </Router>
   );
