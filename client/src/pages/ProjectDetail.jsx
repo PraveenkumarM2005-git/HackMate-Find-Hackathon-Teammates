@@ -180,26 +180,20 @@ const ProjectDetail = () => {
                         </div>
                     </div>
 
-                    {(status === 'accepted' || isOwner) && (
-                        <div className="glass-card" style={{ border: `2px solid ${status === 'accepted' ? 'var(--success)' : 'var(--primary)'}`, background: 'rgba(255, 255, 255, 0.02)' }}>
+                    {status === 'accepted' && (
+                        <div className="glass-card" style={{ border: '2px solid var(--success)', background: 'rgba(16, 185, 129, 0.05)' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
                                 <div className="premium-gradient" style={{ width: '60px', height: '60px', borderRadius: '1rem', display: 'grid', placeItems: 'center' }}>
-                                    {status === 'accepted' ? <CheckCircle size={32} color="white" /> : <MessageCircle size={32} color="white" />}
+                                    <CheckCircle size={32} color="white" />
                                 </div>
                                 <div style={{ flex: 1 }}>
-                                    <h4 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '0.25rem' }}>
-                                        {status === 'accepted' ? 'Application Accepted!' : 'Team Headquarters'}
-                                    </h4>
-                                    <p style={{ color: 'var(--text-muted)' }}>
-                                        {status === 'accepted'
-                                            ? 'You are now a part of this squad. Time to build something epic.'
-                                            : 'Access the secure team channel to coordinate with your members.'}
-                                    </p>
+                                    <h4 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '0.25rem' }}>Application Accepted!</h4>
+                                    <p style={{ color: 'var(--text-muted)' }}>You are now a part of this squad. Time to build something epic.</p>
                                 </div>
                                 <button
                                     onClick={() => navigate(`/chat/${id}`)}
                                     className="btn-primary"
-                                    style={{ background: status === 'accepted' ? 'var(--success)' : 'var(--primary)', boxShadow: '0 4px 12px rgba(99, 102, 241, 0.3)' }}
+                                    style={{ background: 'var(--success)', boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)' }}
                                 >
                                     <MessageCircle size={20} /> Open Team Chat
                                 </button>
@@ -280,7 +274,7 @@ const ProjectDetail = () => {
                                                                 className="btn-primary"
                                                                 style={{ background: 'var(--success)', fontSize: '0.85rem', padding: '0.75rem 1.25rem' }}
                                                             >
-                                                                <MessageCircle size={16} /> Chat
+                                                                <MessageCircle size={16} /> Open Team Chat
                                                             </button>
                                                         )}
                                                     </div>

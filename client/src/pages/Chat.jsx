@@ -61,6 +61,16 @@ const Chat = () => {
 
         setProject(projectData);
 
+        // Fetch current user's profile for optimistic messages
+        const { data: myProfile } = await supabase
+            .from('profiles')
+            .select('id, name, github_url')
+            .eq('id', currentUser.id)
+            .single();
+        if (myProfile) {
+            userProfileRef.current = myProfile;
+        }
+
         // Fetch messages without FK join to avoid 400 errors
         const { data: msgs, error } = await supabase
             .from('messages')
@@ -94,31 +104,73 @@ const Chat = () => {
             setMessages([]);
         }
     };
+    const userProfileRef = useRef(null);
 
     const fetchNewMessage = async (msg) => {
+        // Skip if we already have this message (from optimistic update)
+        setMessages(prev => {
+            if (prev.some(m => m.id === msg.id)) return prev;
+            return prev;
+        });
+
+        // Check if message already exists before adding
+        const alreadyExists = messages.some(m => m.id === msg.id);
+        if (alreadyExists) return;
+
         const { data: profile } = await supabase
             .from('profiles')
             .select('id, name, github_url')
             .eq('id', msg.sender_id)
             .single();
 
-        setMessages(prev => [...prev, { ...msg, profiles: profile || { name: 'Unknown' } }]);
+        setMessages(prev => {
+            // Double-check to prevent race conditions
+            if (prev.some(m => m.id === msg.id)) return prev;
+            // Also remove any optimistic message that matches
+            const filtered = prev.filter(m => !(m._optimistic && m.content === msg.content && m.sender_id === msg.sender_id));
+            return [...filtered, { ...msg, profiles: profile || { name: 'Unknown' } }];
+        });
     };
 
     const sendMessage = async (e) => {
         e.preventDefault();
         if (!newMessage.trim()) return;
 
-        const { error } = await supabase
+        const messageContent = newMessage;
+        setNewMessage('');
+
+        // Optimistically add message to UI immediately
+        const optimisticMsg = {
+            id: 'temp-' + Date.now(),
+            project_id: id,
+            sender_id: user.id,
+            content: messageContent,
+            created_at: new Date().toISOString(),
+            profiles: userProfileRef.current || { name: 'You' },
+            _optimistic: true
+        };
+        setMessages(prev => [...prev, optimisticMsg]);
+
+        const { data, error } = await supabase
             .from('messages')
             .insert({
                 project_id: id,
                 sender_id: user.id,
-                content: newMessage
-            });
+                content: messageContent
+            })
+            .select()
+            .single();
 
-        if (error) alert(error.message);
-        setNewMessage('');
+        if (error) {
+            alert(error.message);
+            // Remove optimistic message on error
+            setMessages(prev => prev.filter(m => m.id !== optimisticMsg.id));
+        } else if (data) {
+            // Replace optimistic message with real one
+            setMessages(prev => prev.map(m =>
+                m.id === optimisticMsg.id ? { ...data, profiles: optimisticMsg.profiles } : m
+            ));
+        }
     };
 
     if (!project) return (
