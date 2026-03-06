@@ -61,23 +61,48 @@ const Chat = () => {
 
         setProject(projectData);
 
-        const { data: msgs } = await supabase
+        // Fetch messages without FK join to avoid 400 errors
+        const { data: msgs, error } = await supabase
             .from('messages')
-            .select('*, profiles(name, avatar_url)')
+            .select('*')
             .eq('project_id', id)
             .order('created_at', { ascending: true });
 
-        setMessages(msgs || []);
+        if (error) {
+            console.error('Error fetching messages:', error);
+            setMessages([]);
+            return;
+        }
+
+        if (msgs && msgs.length > 0) {
+            // Get unique sender IDs and fetch their profiles separately
+            const senderIds = [...new Set(msgs.map(m => m.sender_id))];
+            const { data: profiles } = await supabase
+                .from('profiles')
+                .select('id, name, github_url')
+                .in('id', senderIds);
+
+            const profileMap = {};
+            (profiles || []).forEach(p => { profileMap[p.id] = p; });
+
+            const enrichedMsgs = msgs.map(m => ({
+                ...m,
+                profiles: profileMap[m.sender_id] || { name: 'Unknown' }
+            }));
+            setMessages(enrichedMsgs);
+        } else {
+            setMessages([]);
+        }
     };
 
     const fetchNewMessage = async (msg) => {
         const { data: profile } = await supabase
             .from('profiles')
-            .select('name, avatar_url')
+            .select('id, name, github_url')
             .eq('id', msg.sender_id)
             .single();
 
-        setMessages(prev => [...prev, { ...msg, profiles: profile }]);
+        setMessages(prev => [...prev, { ...msg, profiles: profile || { name: 'Unknown' } }]);
     };
 
     const sendMessage = async (e) => {
