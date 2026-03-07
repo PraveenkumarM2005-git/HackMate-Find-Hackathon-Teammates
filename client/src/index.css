@@ -224,6 +224,12 @@ textarea.input-field {
     grid-template-columns: 1fr !important;
     gap: 1rem !important;
   }
+
+  /* Chat page button overrides — keep buttons compact in flex layouts */
+  .glass-card .btn-primary,
+  .glass-card .btn-outline {
+    width: auto;
+  }
 }
 
 

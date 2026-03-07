@@ -181,27 +181,27 @@ const Chat = () => {
     );
 
     return (
-        <div className="container animate-fade-in" style={{ height: 'calc(100vh - 120px)', display: 'flex', flexDirection: 'column', paddingTop: '2rem', paddingBottom: '2rem' }}>
-            <div className="glass-card" style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', padding: 0, borderColor: 'var(--primary)' }}>
+        <div className="animate-fade-in" style={{ height: 'calc(100vh - 70px)', display: 'flex', flexDirection: 'column', padding: '0.75rem', maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
+            <div className="glass-card" style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', padding: 0, borderColor: 'var(--primary)', transform: 'none' }}
+                onMouseEnter={(e) => e.currentTarget.style.transform = 'none'}
+                onMouseLeave={(e) => e.currentTarget.style.transform = 'none'}
+            >
                 {/* Header */}
-                <div style={{ padding: '1.5rem 2rem', borderBottom: '1px solid var(--glass-border)', display: 'flex', alignItems: 'center', gap: '1.5rem', background: 'rgba(255,255,255,0.02)' }}>
-                    <button onClick={() => navigate(`/project/${id}`)} className="btn-outline" style={{ padding: '0.5rem', borderRadius: '0.75rem' }}>
-                        <ArrowLeft size={20} />
+                <div style={{ padding: '1rem 1rem', borderBottom: '1px solid var(--glass-border)', display: 'flex', alignItems: 'center', gap: '0.75rem', background: 'rgba(255,255,255,0.02)', flexShrink: 0 }}>
+                    <button onClick={() => navigate(`/project/${id}`)} className="btn-outline" style={{ padding: '0.5rem', borderRadius: '0.75rem', width: 'auto', flexShrink: 0 }}>
+                        <ArrowLeft size={18} />
                     </button>
-                    <div style={{ flex: 1 }}>
-                        <h3 style={{ fontSize: '1.25rem', fontWeight: '800' }}>{project.title} <span className="premium-gradient-text">HQ</span></h3>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.25rem' }}>
-                            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--success)', boxShadow: '0 0 10px var(--success)' }}></div>
-                            <p style={{ fontSize: '0.8rem', color: 'var(--success)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Secure Channel Active</p>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                        <h3 style={{ fontSize: '1.1rem', fontWeight: '800', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{project.title} <span className="premium-gradient-text">HQ</span></h3>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginTop: '0.15rem' }}>
+                            <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--success)', boxShadow: '0 0 8px var(--success)', flexShrink: 0 }}></div>
+                            <p style={{ fontSize: '0.7rem', color: 'var(--success)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Secure Channel</p>
                         </div>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '-0.5rem' }}>
-                        {/* We could show team avatars here */}
                     </div>
                 </div>
 
                 {/* Messages */}
-                <div style={{ flex: 1, overflowY: 'auto', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', background: 'radial-gradient(circle at center, rgba(99, 102, 241, 0.03) 0%, transparent 70%)' }}>
+                <div style={{ flex: 1, overflowY: 'auto', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem', background: 'radial-gradient(circle at center, rgba(99, 102, 241, 0.03) 0%, transparent 70%)' }}>
                     {messages.length === 0 && (
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', opacity: 0.5 }}>
                             <MessageSquare size={48} style={{ marginBottom: '1rem' }} />
@@ -256,7 +256,7 @@ const Chat = () => {
                 </div>
 
                 {/* Input */}
-                <div style={{ padding: '1.5rem 2rem', background: 'rgba(0,0,0,0.2)', borderTop: '1px solid var(--glass-border)' }}>
+                <div style={{ padding: '0.75rem 1rem', background: 'rgba(0,0,0,0.2)', borderTop: '1px solid var(--glass-border)', flexShrink: 0 }}>
                     <form onSubmit={sendMessage} style={{ display: 'flex', gap: '1rem' }}>
                         <input
                             type="text"
