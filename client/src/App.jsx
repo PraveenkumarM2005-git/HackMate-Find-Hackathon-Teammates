@@ -7,11 +7,15 @@ import CreateProject from './pages/CreateProject';
 import Profile from './pages/Profile';
 import ProjectDetail from './pages/ProjectDetail';
 import Chat from './pages/Chat';
+import { Toaster } from 'react-hot-toast';
+import NotificationsListener from './components/NotificationsListener';
 import './index.css';
 
 function App() {
   return (
     <Router>
+      <Toaster position="bottom-right" />
+      <NotificationsListener />
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Navbar />
         <main style={{ flex: 1 }}>
