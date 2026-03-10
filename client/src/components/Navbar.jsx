@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
-import { Github, LogOut, LayoutDashboard, PlusCircle, Search, User, Zap } from 'lucide-react';
+import { Github, LogOut, LayoutDashboard, PlusCircle, Search, User, Zap, Sun, Moon } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
     const [user, setUser] = useState(null);
+    const [isDarkMode, setIsDarkMode] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,6 +19,16 @@ const Navbar = () => {
 
         return () => subscription.unsubscribe();
     }, []);
+
+    useEffect(() => {
+        if (isDarkMode) {
+            document.documentElement.classList.remove('light');
+        } else {
+            document.documentElement.classList.add('light');
+        }
+    }, [isDarkMode]);
+
+    const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
     const handleLogin = async () => {
         const { error } = await supabase.auth.signInWithOAuth({
@@ -60,6 +71,9 @@ const Navbar = () => {
             </Link>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <button onClick={toggleTheme} style={{ color: 'var(--text-muted)' }} title="Toggle Theme">
+                    {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
+                </button>
                 <Link to="/explore" className="hide-mobile" style={{ color: 'var(--text-muted)', fontWeight: '500', fontSize: '0.9rem' }}>Explore</Link>
 
                 {user ? (
