@@ -8,7 +8,8 @@
 
 - **🎯 Smart Skill Matching**: Our algorithm calculates a "Compatibility Score" between developers' skills and project needs instantly.
 - **⚡ Real-time Collaboration**: Dedicated secure chat channels for accepted team members using Supabase Realtime logic.
-- **🛡️ Secure Auth**: One-click login via GitHub OAuth for a seamless developer experience.
+- **� Realtime Notifications**: Realtime notifications leveraging Supabase Realtime for new requests, acceptances, and messages.
+- **�🛡️ Secure Auth**: One-click login via GitHub OAuth for a seamless developer experience.
 - **💎 Premium UI**: A state-of-the-art "Glassmorphism" interface with a dark theme and neon accents.
 - **📁 Squad Management**: Project owners can review join requests, see skill profiles, and approve/reject members with a single click.
 
