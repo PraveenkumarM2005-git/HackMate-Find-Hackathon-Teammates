@@ -21,7 +21,12 @@ const Navbar = () => {
 
     const handleLogin = async () => {
         const { error } = await supabase.auth.signInWithOAuth({
-            provider: 'github'
+            provider: 'github',
+            options: {
+                queryParams: {
+                    prompt: 'consent',
+                },
+            },
         });
         if (error) console.error('Error logging in:', error.message);
     };
