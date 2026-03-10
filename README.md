@@ -10,6 +10,8 @@
 - **⚡ Real-time Collaboration**: Dedicated secure chat channels for accepted team members using Supabase Realtime logic.
 - **� Realtime Notifications**: Realtime notifications leveraging Supabase Realtime for new requests, acceptances, and messages.
 - **�🛡️ Secure Auth**: One-click login via GitHub OAuth for a seamless developer experience.
+- **📱 Responsive Design**: Built with a mobile-first approach to ensure a seamless experience across smartphones, tablets, and desktops.
+- **🌙 Dark Mode Support**: Toggle between light and dark themes easily. Tailwind CSS provides native support for dark mode styling.
 - **💎 Premium UI**: A state-of-the-art "Glassmorphism" interface with a dark theme and neon accents.
 - **📁 Squad Management**: Project owners can review join requests, see skill profiles, and approve/reject members with a single click.
 
